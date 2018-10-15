@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 
 import history from './util/history'
 import { Login, Main } from './pages'
@@ -14,10 +14,10 @@ class App extends Component {
     return (
       <div style={{ width: '100%' }}>
         <Router history={history}>
-          <div>
-            <Route path="/" exact component={Main} />
+          <Switch>
             <Route path="/login" component={Login} />
-          </div>
+            <Route path="/" component={Main} />
+          </Switch>
         </Router>
       </div>
     )

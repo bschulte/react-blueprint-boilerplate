@@ -94,7 +94,7 @@ export default class Login extends Component {
                   />
                 </Col>
               </Row>
-              <Row>
+              <Row style={{ marginTop: '15px' }}>
                 <Col xs={12}>
                   <InputGroup
                     id="password-input"
@@ -105,7 +105,7 @@ export default class Login extends Component {
                   />
                 </Col>
               </Row>
-              <Divider />
+              <Divider style={{ margin: '15px' }} />
               <Row>
                 <Col xs={12}>
                   <Button

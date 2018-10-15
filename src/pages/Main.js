@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
-import { checkAuth } from '../util/auth'
+import history from '../util/history'
+import { checkAuth, deleteToken } from '../util/auth'
 
 export default class Main extends Component {
   async componentDidMount() {
-    await checkAuth()
+    const userLoggedIn = await checkAuth()
+    if (!userLoggedIn) {
+      console.log('Logging user out')
+      deleteToken()
+      history.push('/login')
+    }
   }
 
   render() {

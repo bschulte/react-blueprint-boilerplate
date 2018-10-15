@@ -9,7 +9,7 @@ class HeaderBar extends Component {
   render() {
     const headerStyle = {
       backgroundColor: Colors.WHITE,
-      height: '10vh',
+      height: '8vh',
       borderBottom: `2px solid ${Colors.BLUE1}`,
       alignItems: 'center'
     }

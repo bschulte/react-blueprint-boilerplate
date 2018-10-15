@@ -30,19 +30,41 @@ const checkForUnauthorized = (statusCode) => {
     history.push('/login')
   }
 }
+
 // Helper function to issue a GET network request
 // "params" should be an object of params to be passed in the query string
-export const get = async (url, params = {}, headers = {}) => {
+export const get = async (url, queryParams = {}, headers = {}) => {
   if (!url) {
     throw new Error('get request with no URL!')
   }
 
-  const response = await fetch(`${url}?${generateUrlQueryParams(params)}`, {
-    method: 'GET',
-    headers: setupHeaders(headers)
-  })
+  const response = await fetch(
+    `${url}?${generateUrlQueryParams(queryParams)}`,
+    {
+      method: 'GET',
+      headers: setupHeaders(headers)
+    }
+  )
 
   checkForUnauthorized(response.status)
+
+  return response
+}
+
+// Helper function to issue a POST network request
+// params should be the request body params
+export const post = async (url, bodyParams = {}, headers = {}) => {
+  if (!url) {
+    throw new Error('get request with no URL!')
+  }
+
+  const response = await fetch(`${url}`, {
+    method: 'POST',
+    headers: setupHeaders(headers),
+    body: JSON.stringify(bodyParams)
+  })
+
+  checkForUnauthorized(response)
 
   return response
 }

@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Switch } from 'react-router-dom'
+
+import HeaderBar from '../components/HeaderBar'
 
 import history from '../util/history'
 import { checkAuth, deleteToken } from '../util/auth'
@@ -14,6 +17,11 @@ export default class Main extends Component {
   }
 
   render() {
-    return <div>Main</div>
+    return (
+      <div>
+        <HeaderBar />
+        Main
+      </div>
+    )
   }
 }

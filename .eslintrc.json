@@ -12,7 +12,8 @@
     "arrow-parens": "off",
     "no-console": "off",
     "no-useless-escape": "off",
-    "import/no-cycle": "off"
+    "import/no-cycle": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "env": {
     "browser": true

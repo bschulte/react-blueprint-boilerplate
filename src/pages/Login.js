@@ -11,9 +11,12 @@ import {
 } from '@blueprintjs/core'
 
 import { AppToaster } from '../components/AppToaster'
+
 import { setToken } from '../util/auth'
 import { post } from '../util/networking'
 import { validateEmail } from '../util/helpers'
+
+import userStore from '../store/userStore'
 
 export default class Login extends Component {
   constructor(props) {
@@ -64,6 +67,7 @@ export default class Login extends Component {
     const response = await post('/users/login', { email, password })
     if (response.status === 200) {
       setToken(response.data.token)
+      userStore.email = email
       history.push('/')
     }
   }

@@ -1,4 +1,5 @@
 import { Intent } from '@blueprintjs/core'
+import axios from 'axios'
 import { getToken } from './auth'
 import history from './history'
 import { AppToaster } from '../components/AppToaster'
@@ -38,17 +39,18 @@ export const get = async (url, queryParams = {}, headers = {}) => {
     throw new Error('get request with no URL!')
   }
 
-  const response = await fetch(
-    `${url}?${generateUrlQueryParams(queryParams)}`,
-    {
-      method: 'GET',
-      headers: setupHeaders(headers)
-    }
-  )
+  let requestUrl = url
+  if (Object.keys(queryParams) > 0) {
+    requestUrl = `${url}?${generateUrlQueryParams(queryParams)}`
+  }
+
+  const response = await axios.get(requestUrl, {
+    headers: setupHeaders(headers)
+  })
 
   checkForUnauthorized(response.status)
 
-  return response
+  return { data: response.data, status: response.status }
 }
 
 // Helper function to issue a POST network request
@@ -58,13 +60,12 @@ export const post = async (url, bodyParams = {}, headers = {}) => {
     throw new Error('get request with no URL!')
   }
 
-  const response = await fetch(`${url}`, {
+  const response = await axios.post(`${url}`, bodyParams, {
     method: 'POST',
-    headers: setupHeaders(headers),
-    body: JSON.stringify(bodyParams)
+    headers: setupHeaders(headers)
   })
 
   checkForUnauthorized(response)
 
-  return response
+  return { data: response.data, status: response.status }
 }

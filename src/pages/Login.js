@@ -47,6 +47,7 @@ export default class Login extends Component {
   }
 
   async handleLogin() {
+    const { history } = this.props
     const { email, password } = this.state
 
     // Check that both email and password are not empty
@@ -60,8 +61,10 @@ export default class Login extends Component {
     }
 
     const response = await get('/users/login', { email, password })
-
     console.log(response)
+    if (response.status === 200) {
+      history.push('/')
+    }
   }
 
   render() {

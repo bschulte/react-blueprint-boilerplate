@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 
-import { Login } from './pages'
+import history from './util/history'
+import { Login, Main } from './pages'
 
 // Blueprint styling
 import '@blueprintjs/core/lib/css/blueprint.css'
@@ -12,8 +13,11 @@ class App extends Component {
   render() {
     return (
       <div style={{ width: '100%' }}>
-        <Router>
-          <Route path="/login" component={Login} />
+        <Router history={history}>
+          <div>
+            <Route path="/" exact component={Main} />
+            <Route path="/login" component={Login} />
+          </div>
         </Router>
       </div>
     )

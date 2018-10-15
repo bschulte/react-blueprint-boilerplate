@@ -1,0 +1,15 @@
+@import '~@blueprintjs/core/lib/scss/variables';
+body {
+  background-color: $light-gray4;
+}
+
+/* Grid overrides */
+.container {
+  width: 100%;
+}
+
+.row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/*******************/

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Row, Col } from 'react-flexbox-grid'
 import { Colors, Icon } from '@blueprintjs/core'
+import { PRIMARY_COLOR } from '../data/config'
 
 import history from '../util/history'
 
@@ -32,7 +33,7 @@ class NavbarItem extends Component {
       height: '55px',
       color: Colors.WHITE,
       backgroundColor: hovered
-        ? Colors.BLUE1
+        ? PRIMARY_COLOR
         : location.pathname.startsWith(route.path)
           ? Colors.GRAY1
           : '',

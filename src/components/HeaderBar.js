@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Colors, H2, Icon } from '@blueprintjs/core'
 import { Row, Col } from 'react-flexbox-grid'
 import { view } from 'react-easy-state'
+import { PRIMARY_COLOR } from '../data/config'
 
 import userStore from '../store/userStore'
 
@@ -10,7 +11,7 @@ class HeaderBar extends Component {
     const headerStyle = {
       backgroundColor: Colors.WHITE,
       height: '8vh',
-      borderBottom: `2px solid ${Colors.BLUE1}`,
+      borderBottom: `2px solid ${PRIMARY_COLOR}`,
       alignItems: 'center'
     }
 

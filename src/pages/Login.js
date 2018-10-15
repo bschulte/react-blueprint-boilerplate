@@ -11,7 +11,7 @@ import {
 } from '@blueprintjs/core'
 
 import { AppToaster } from '../components/AppToaster'
-import { get } from '../util/networking'
+import { post } from '../util/networking'
 import { validateEmail } from '../util/helpers'
 
 export default class Login extends Component {
@@ -60,7 +60,7 @@ export default class Login extends Component {
       })
     }
 
-    const response = await get('/users/login', { email, password })
+    const response = await post('/users/login', { email, password })
     console.log(response)
     if (response.status === 200) {
       history.push('/')

@@ -15,10 +15,9 @@ import { AppToaster } from '../components/AppToaster'
 import { setToken } from '../util/auth'
 import { post } from '../util/networking'
 import { validateEmail } from '../util/helpers'
+import { AppContext } from '../context/appContext'
 
-import userStore from '../store/userStore'
-
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
 
@@ -53,6 +52,7 @@ export default class Login extends Component {
   async handleLogin() {
     const { history } = this.props
     const { email, password } = this.state
+    console.log('context:', this.context)
 
     // Check that both email and password are not empty
     if (!email || !password) {
@@ -67,18 +67,20 @@ export default class Login extends Component {
     const response = await post('/users/login', { email, password })
     if (response.status === 200) {
       setToken(response.data.token)
-      userStore.email = email
+      this.context.setEmail(email)
+
       history.push('/')
     }
   }
 
   render() {
     const { emailValid, emailFocused, email, password } = this.state
+    console.log('Context in render:', this.context)
     return (
       <Row center="xs" style={{ marginTop: '20vh' }}>
         <Col xs={4}>
           <Card elevation={1}>
-            <H1>Login</H1>
+            <H1>Boilerplate Portal</H1>
             <FormGroup>
               <Row>
                 <Col xs={12}>
@@ -125,3 +127,7 @@ export default class Login extends Component {
     )
   }
 }
+
+Login.contextType = AppContext
+
+export default Login

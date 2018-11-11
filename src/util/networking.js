@@ -32,25 +32,39 @@ const checkForUnauthorized = (statusCode) => {
   }
 }
 
-// Helper function to issue a GET network request
-// "params" should be an object of params to be passed in the query string
-export const get = async (url, queryParams = {}, headers = {}) => {
-  if (!url) {
-    throw new Error('get request with no URL!')
+const getOrPut = async (requestType, url, queryParams = {}, headers = {}) => {
+  if (!url || !requestType) {
+    throw new Error('get request with no URL or request type!')
   }
 
-  let requestUrl = url
-  if (Object.keys(queryParams) > 0) {
-    requestUrl = `${url}?${generateUrlQueryParams(queryParams)}`
+  let response
+  try {
+    response = await axios({
+      method: requestType.toUpperCase(),
+      url,
+      params: queryParams,
+      headers: setupHeaders(headers)
+    })
+  } catch (err) {
+    console.error('Error performing get request', url, err)
+    return null
   }
-
-  const response = await axios.get(requestUrl, {
-    headers: setupHeaders(headers)
-  })
 
   checkForUnauthorized(response.status)
 
   return { data: response.data, status: response.status }
+}
+
+// Helper function to issue a GET network request
+// "params" should be an object of params to be passed in the query string
+export const get = async (url, queryParams = {}, headers = {}) => {
+  return getOrPut('get', url, queryParams, headers)
+}
+
+// Helper function to issue a PUT network request
+// "params" should be an object of params to be passed in the query string
+export const put = async (url, queryParams = {}, headers = {}) => {
+  return getOrPut('put', url, queryParams, headers)
 }
 
 // Helper function to issue a POST network request

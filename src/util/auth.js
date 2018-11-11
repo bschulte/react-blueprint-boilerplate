@@ -1,5 +1,4 @@
 import { get } from './networking'
-import userStore from '../store/userStore'
 
 export const getToken = () => {
   return localStorage.getItem('authToken')
@@ -15,12 +14,11 @@ export const deleteToken = () => {
 
 export const checkAuth = async () => {
   try {
-    const { data, status } = await get('/users/verify-auth')
+    const { data } = await get('/users/verify-auth')
     // Get the email from verify auth. We do this since there can be a page
     // reload where the login page won't be reached (where the email is initially
     // set) and we need to make sure we have the value set in that case.
-    userStore.email = data.email
-    return status === 200
+    return data
   } catch (err) {
     console.log('Error checking user auth')
     return false

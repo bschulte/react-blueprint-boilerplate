@@ -1,17 +1,18 @@
-import React from 'react'
+import Dashboard from '../pages/Main/Dashboard'
+import SecondPage from '../pages/Main/SecondPage'
 
 export const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => <div>Test</div>,
+    component: Dashboard,
     icon: 'dashboard'
   },
   {
-    path: '/user',
-    name: 'User',
-    component: () => <div>User</div>,
-    icon: 'user'
+    path: '/registration-codes',
+    name: 'Registration Codes',
+    component: SecondPage,
+    icon: 'new-person'
   }
 ]
 
